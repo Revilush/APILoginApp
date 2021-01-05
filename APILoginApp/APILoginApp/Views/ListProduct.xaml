@@ -1,12 +1,38 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="APILoginApp.Views.ListProduct">
+             x:Class="APILoginApp.Views.ListProduct"
+             xmlns:viewModel="clr-namespace:APILoginApp.ViewModels">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <viewModel:ProductViewModel x:Key="mkey"></viewModel:ProductViewModel>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout BindingContext="{Binding Source={x:StaticResource mkey}}">
+            <Label Text="List Products View" TextColor="Red" BackgroundColor="Yellow" FontSize="20"/>
+            <Button Text="Load Products" TextColor="Red" BackgroundColor="Yellow" FontSize="20"
+                     Command="{Binding Path=GetProductsCommand}"></Button>
+            <ListView ItemsSource="{Binding Path=Products}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="{Binding ProductRowId}"></Label>
+                                <Label Text="{Binding ProductId}"></Label>
+                                <Label Text="{Binding ProductName}"></Label>
+                                <Label Text="{Binding CategoryName}"></Label>
+                                <Label Text="{Binding Manufacturer}"></Label>
+                                <Label Text="{Binding Description}"></Label>
+                                <Label Text="{Binding BasePrice}"></Label>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Button Text="Go To Add" IsEnabled="{Binding Path=IsAddEnabled}"
+                     Command="{Binding NavigateCommand}"></Button>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

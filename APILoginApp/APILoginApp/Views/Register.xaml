@@ -1,12 +1,27 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="APILoginApp.Views.Register">
+             x:Class="APILoginApp.Views.Register"
+             xmlns:viewmodel="clr-namespace:APILoginApp.ViewModels">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <viewmodel:UserViewModel x:Key="umkey"></viewmodel:UserViewModel>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout BindingContext="{Binding Source={x:StaticResource umkey}}">
+            <Label Text="Register User"/>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Email"></Label>
+                <Entry Text="{Binding Path=User.Email}" WidthRequest="200"></Entry>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Password"></Label>
+                <Entry Text="{Binding Path=User.Password}" WidthRequest="200"></Entry>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Button Text="Register" BorderColor="Yellow" BackgroundColor="LightGreen" Command="{Binding AddUserCommand}"></Button>
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

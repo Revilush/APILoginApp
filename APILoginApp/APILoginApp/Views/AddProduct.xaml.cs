@@ -15,6 +15,8 @@ namespace APILoginApp.Views
         public AddProduct()
         {
             InitializeComponent();
+
         }
+
     }
 }
