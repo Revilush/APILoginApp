@@ -26,15 +26,15 @@ namespace APILoginApp.ViewModels
             #endregion
 
             #region Configure Command Properties by passing private method references to it
-            GetProductsCommand = new Command(GetData);
-            AddProductCommand = new Command(AddProduct);
+            //GetProductsCommand = new Command(GetData);
+            AddUserCommand = new Command(AddUser);
             NavigateCommand = new Command(Navigate);
             #endregion
         }
 
         #region Command Properties
         public ICommand GetProductsCommand { get; private set; }
-        public ICommand AddProductCommand { get; private set; }
+        public ICommand AddUserCommand { get; private set; }
         public ICommand NavigateCommand { get; private set; }
         #endregion
 
@@ -81,23 +81,23 @@ namespace APILoginApp.ViewModels
         #endregion
 
 
-        #region Private one-way methods. These method will call to Services for Read/Write operations
-        private async void GetData()
-        {
-            // clear the Products collection
-            Users.Clear();
-            var productsResponse = await userService.GetProductInfoDataAsync();
-            foreach (UserInfo usr in productsResponse)
-            {
-                _Users.Add(usr); // call CollectionChanged and then PropertyChanged on ObservableCollection
-            }
-            if (_Users.Count >= 0)
-            {
-                IsAddEnabled = true;
-            }
-        }
+        //#region Private one-way methods. These method will call to Services for Read/Write operations
+        //private async void GetData()
+        //{
+        //    // clear the Products collection
+        //    Users.Clear();
+        //    var productsResponse = await userService.GetProductInfoDataAsync();
+        //    foreach (UserInfo usr in productsResponse)
+        //    {
+        //        _Users.Add(usr); // call CollectionChanged and then PropertyChanged on ObservableCollection
+        //    }
+        //    if (_Users.Count >= 0)
+        //    {
+        //        IsAddEnabled = true;
+        //    }
+        //}
 
-        private async void AddProduct()
+        private async void AddUser()
         {
             User = await userService.PostProductInfoAsync(User);
             if (User.UserId > 0)
@@ -113,8 +113,6 @@ namespace APILoginApp.ViewModels
             // App.Current.MainPage, the current page object
             await App.Current.MainPage.Navigation.PushModalAsync(new Views.AddProduct());
         }
-
-        #endregion
 
 
 
