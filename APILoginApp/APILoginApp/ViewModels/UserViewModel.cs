@@ -29,6 +29,7 @@ namespace APILoginApp.ViewModels
             //GetProductsCommand = new Command(GetData);
             AddUserCommand = new Command(AddUser);
             NavigateCommand = new Command(Navigate);
+            PassControlCommand = new Command(PassControl);
             #endregion
         }
 
@@ -36,6 +37,7 @@ namespace APILoginApp.ViewModels
         public ICommand GetProductsCommand { get; private set; }
         public ICommand AddUserCommand { get; private set; }
         public ICommand NavigateCommand { get; private set; }
+        public ICommand PassControlCommand { get; private set; }
         #endregion
 
 
@@ -112,6 +114,14 @@ namespace APILoginApp.ViewModels
             // naigate to Add Product Page
             // App.Current.MainPage, the current page object
             await App.Current.MainPage.Navigation.PushModalAsync(new Views.AddProduct());
+        }
+
+
+        private async void PassControl()
+        {
+            // naigate to Add Product Page
+            // App.Current.MainPage, the current page object
+            await App.Current.MainPage.Navigation.PushModalAsync(new Views.Register());
         }
 
 

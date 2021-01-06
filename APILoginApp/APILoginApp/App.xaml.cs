@@ -10,7 +10,7 @@ namespace APILoginApp
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new Views.Login();
         }
 
         protected override void OnStart()
