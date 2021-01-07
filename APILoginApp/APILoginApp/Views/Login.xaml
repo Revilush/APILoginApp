@@ -14,10 +14,10 @@
                 <Entry Text="{Binding Path=User.Password}" WidthRequest="200"></Entry>
             </StackLayout>
             <StackLayout Orientation="Horizontal">
-                <Button Text="Login" BorderColor="Yellow" BackgroundColor="LightGreen" Command="{Binding AddUserCommand}"></Button>
+                <Button Text="Login" BorderColor="Yellow" BackgroundColor="LightGreen" Command="{Binding CheckUserCommand}"></Button>
             </StackLayout>
             <StackLayout Orientation="Horizontal">
-                <Button Text="Register" BorderColor="Yellow" BackgroundColor="LightGreen" Command="{Binding }"></Button>
+                <Button Text="Register" BorderColor="Purple" BackgroundColor="Gray"  Command="{Binding PassControlCommand }"></Button>
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>

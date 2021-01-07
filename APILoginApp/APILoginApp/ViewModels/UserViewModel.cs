@@ -30,6 +30,7 @@ namespace APILoginApp.ViewModels
             AddUserCommand = new Command(AddUser);
             NavigateCommand = new Command(Navigate);
             PassControlCommand = new Command(PassControl);
+            CheckUserCommand = new Command(CheckUser);
             #endregion
         }
 
@@ -38,6 +39,7 @@ namespace APILoginApp.ViewModels
         public ICommand AddUserCommand { get; private set; }
         public ICommand NavigateCommand { get; private set; }
         public ICommand PassControlCommand { get; private set; }
+        public ICommand CheckUserCommand { get; private set; }
         #endregion
 
 
@@ -101,26 +103,36 @@ namespace APILoginApp.ViewModels
 
         private async void AddUser()
         {
-            User = await userService.PostProductInfoAsync(User);
-            if (User.UserId > 0)
+            User = await userService.PostUserInfoAsync(User);
+            if (User.UserId != 0)
             {
-                // navigate to the Product List View
                 await App.Current.MainPage.Navigation.PopModalAsync();
             }
+            // naigate to Login Page
+            await App.Current.MainPage.Navigation.PushModalAsync(new Views.Login());
+        }
+
+        private async void CheckUser()
+        {
+            User = await userService.PostUserInfoAsync(User);
+            if (User.UserId != 0)
+            {
+                await App.Current.MainPage.Navigation.PopModalAsync();
+            }
+            // naigate to Login Page
+            await App.Current.MainPage.Navigation.PushModalAsync(new Views.Login());
         }
 
         private async void Navigate()
         {
             // naigate to Add Product Page
-            // App.Current.MainPage, the current page object
             await App.Current.MainPage.Navigation.PushModalAsync(new Views.AddProduct());
         }
 
 
         private async void PassControl()
         {
-            // naigate to Add Product Page
-            // App.Current.MainPage, the current page object
+            // naigate to Register Page
             await App.Current.MainPage.Navigation.PushModalAsync(new Views.Register());
         }
 

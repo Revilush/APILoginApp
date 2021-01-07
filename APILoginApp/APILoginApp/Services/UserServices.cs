@@ -19,7 +19,7 @@ namespace APILoginApp.Services
             client = new HttpClient();
         }
 
-        public async Task<List<UserInfo>> GetProductInfoDataAsync()
+        public async Task<List<UserInfo>> GetUserInfoDataAsync()
         {
             List<UserInfo> users = new List<UserInfo>();
             HttpResponseMessage response = await client.GetAsync(url);
@@ -31,7 +31,7 @@ namespace APILoginApp.Services
             return users;
         }
 
-        public async Task<UserInfo> PostProductInfoAsync(UserInfo user)
+        public async Task<UserInfo> PostUserInfoAsync(UserInfo user)
         {
             string jsonRequest = JsonConvert.SerializeObject(user);
             StringContent requestContents = new StringContent(jsonRequest, Encoding.UTF8, "application/json");
